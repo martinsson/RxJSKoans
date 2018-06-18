@@ -30,5 +30,7 @@
   "scripts": {
     "test": "mocha --ui mocha-qunit-ui -b"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "chai": "^4.1.2"
+  }
 }
