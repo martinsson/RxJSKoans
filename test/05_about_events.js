@@ -1,5 +1,6 @@
-import { Observable } from 'rxjs/Rx'
-import { EventEmitter } from 'events'
+const { Observable, Subject }  = require('rxjs/Rx')
+const Range = require('../util/range')
+const { EventEmitter } = require('events')
 
 QUnit.module('Events')
 
@@ -9,7 +10,7 @@ test('the main event', () => {
   const received = []
   const e = new EventEmitter()
   const subscription = Observable.fromEvent(e, 'change')
-    .subscribe(::received.push)
+    .subscribe(received.push.bind(received))
 
   e.emit('change', 'R')
   e.emit('change', 'x')

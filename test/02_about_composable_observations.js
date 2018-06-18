@@ -1,5 +1,5 @@
-import { Observable } from 'rxjs/Rx'
-import Range from '../util/range'
+const { Observable, Subject }  = require('rxjs/Rx')
+const Range = require('../util/range')
 
 QUnit.module('Composable Observations')
 
@@ -37,7 +37,7 @@ test('we wrote this', () => {
 
   Observable.from(names)
     .filter(n => n.length <= __)
-    .subscribe(::received.push)
+    .subscribe(received.push.bind(received))
 
   equal('Bart,Wes,Erik,Matt', received)
 })

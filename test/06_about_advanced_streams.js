@@ -1,4 +1,4 @@
-import { Observable, Subject } from 'rxjs/Rx'
+const { Observable, Subject }  = require('rxjs/Rx')
 
 QUnit.module('Advanced Streams')
 
@@ -8,7 +8,7 @@ test('merging', () => {
   const easy = []
   const you = Observable.of(1, 2, 3)
   const me = Observable.of('A', 'B', 'C')
-  you.merge(me).subscribe(::easy.push)
+  you.merge(me).subscribe(easy.push.bind(easy))
   equal(easy.join(' '), __)
 })
 
@@ -19,8 +19,8 @@ test('merging events', () => {
   const s1 = new Subject()
   const s2 = new Subject()
 
-  s1.subscribe(::first.push)
-  s1.merge(s2).subscribe(::both.push)
+  s1.subscribe(first.push.bind(first))
+  s1.merge(s2).subscribe(both.push.bind(both))
 
   s1.next('I')
   s1.next('am')

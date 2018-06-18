@@ -1,5 +1,5 @@
-import { Observable } from 'rxjs/Rx'
-import { EventEmitter } from 'events'
+const { Observable, Subject }  = require('rxjs/Rx')
+const { EventEmitter } = require('events')
 
 QUnit.module('Querying')
 
@@ -13,7 +13,7 @@ test('Basic querying', () => {
     .filter(x => x % __ === 0)
     .map(x => x.toString())
     .toArray()
-    .subscribe(::strings.push)
+    .subscribe(strings.push.bind(string))
 
   equal('11,22,33,44,55,66,77,88,99', strings.toString())
 })
@@ -38,7 +38,7 @@ test('buffering with count and skip', () => {
   const results = []
   Observable.range(1, 10)
     .bufferCount(__, __)
-    .subscribe(::results.push)
+    .subscribe(results.push.bind(results))
 
   equal('12345', results[0].join(''))
   equal('678910', results[1].join(''))

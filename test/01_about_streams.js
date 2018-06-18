@@ -1,5 +1,5 @@
-import { Observable, Subject } from 'rxjs/Rx'
-import Range from '../util/range'
+const { Observable, Subject }  = require('rxjs/Rx')
+const Range = require('../util/range')
 
 QUnit.module('Observable Streams')
 
@@ -147,7 +147,7 @@ test('events after you unsubscribe do not count', () => {
 test('events while subscribing', () => {
   const received = []
   const words = new Subject()
-  const observable = words.do(::received.push)
+  const observable = words.do(received.push.bind(received))
 
   words.next('Peter')
   words.next('said')

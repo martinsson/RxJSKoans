@@ -1,4 +1,4 @@
-import { Observable, Scheduler, Subject } from 'rxjs/Rx'
+const { Observable, Scheduler, Subject }  = require('rxjs/Rx')
 
 QUnit.module('Time')
 
@@ -55,7 +55,7 @@ asyncTest('you can place a time limit on how long an event should take', () => {
 
   temperatures
     .timeoutWith(timeout, timeoutEvent)
-    .subscribe(::received.push)
+    .subscribe(received.push.bind(received))
 
   temperatures.next('Started')
 
@@ -76,7 +76,7 @@ asyncTest('debouncing', () => {
   const events = new Subject()
   events
     .debounceTime(100)
-    .subscribe(::received.push)
+    .subscribe(received.push.bind(received))
 
   events.next('f')
   events.next('fr')
@@ -102,7 +102,7 @@ asyncTest('buffering', () => {
   events
     .bufferTime(100)
     .map(c => c.join(''))
-    .subscribe(::received.push)
+    .subscribe(received.push.bind(received))
 
   events.next('R')
   events.next('x')

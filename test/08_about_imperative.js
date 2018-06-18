@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Rx'
+const { Observable }  = require('rxjs/Rx')
 
 QUnit.module('Imperative')
 
@@ -11,7 +11,7 @@ test('can make a decision with an if with no else', () => {
       () => x % 2 === 0,
       Observable.of(x)
     ))
-    .subscribe(::results.push)
+    .subscribe(results.push.bind(result))
 
   equal(__, results.join(''))
 })
@@ -24,7 +24,7 @@ test('can make a decision with an if with an else', () => {
       Observable.of(x),
       Observable.range(x, i)
     ))
-    .subscribe(::results.push)
+    .subscribe(results.push.bind(result))
 
   equal(__, results.join(''))
 })
@@ -82,7 +82,7 @@ test('can make a decision with an if with an else', () => {
 //       () => ++i < 3,
 //       Observable.of(__)
 //     )
-//     .subscribe(::result.push)
+//     .subscribe(result.push.bind(result)
 
 //   equal('4242', result.join(''))
 // })
