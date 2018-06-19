@@ -23,8 +23,7 @@ describe('Time', () => {
             () => { // what to put as error function so that the test fails?
                 },
             () => {
-                done()
-                // done(new Error('make some assertion on complete'))
+                done(new Error('make some assertion on complete'))
             },
         )
 
@@ -37,15 +36,15 @@ describe('Time', () => {
         const source = interval(10).take(10);
 
         return new Promise((resolve, reject) => {
-            let events = []
+            
             source.subscribe(
                 e => {
-                    events.push(e)
+                    // collect events
                 },
                 reject,
                 c => {
-                    // expect(events).eql([])
-                    resolve()
+                    expect(events).eql([])
+
                 }
             )
         })
