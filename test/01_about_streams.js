@@ -6,7 +6,7 @@ QUnit.module('Observable Streams')
 const __ = 'Fill in the blank'
 
 test('simple subscription', () => {
-  Observable.of(42).subscribe(x => { equal(x, __) })
+  Observable.of(42).subscribe(x => { equal(x, 42) })
 })
 
 test('what comes in goes out', () => {
